@@ -26,6 +26,10 @@ namespace TechBeauty.Dados.Map
             builder.Property(x => x.Status)
                 .HasColumnType("int")
                 .IsRequired();
+
+            builder.HasMany<Agendamento>(a => a.Agendamento)
+                .WithOne(x => x.OS)
+                .HasForeignKey(x => x.OrdemServicoID);
         }
     }
 }

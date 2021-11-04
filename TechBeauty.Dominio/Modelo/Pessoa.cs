@@ -10,6 +10,9 @@ namespace TechBeauty.Dominio.Modelo
         public string CPF { get; set; }
         public DateTime DataNascimento { get; set; }
         public List<Contato> Contatos { get; set; }
+        public int ContatosID { get; set; }
+        public List<Cliente> Cliente { get; set; }
+        public int ClientesID { get; set; }
 
     }
 }

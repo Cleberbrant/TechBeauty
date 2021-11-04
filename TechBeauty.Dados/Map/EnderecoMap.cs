@@ -42,6 +42,10 @@ namespace TechBeauty.Dados.Map
 
             builder.Property(x => x.Bairro)
                 .HasColumnType("varchar(50)");
+
+            builder.HasMany<Colaborador>(c => c.Colaboradores)
+                .WithOne(e => e.Endereco)
+                .HasForeignKey(e => e.EnderecosID);
         }
     }
 }

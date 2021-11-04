@@ -29,6 +29,14 @@ namespace TechBeauty.Dados.Map
                 .HasColumnType("date")
                 .IsRequired();
 
+            builder.HasMany<Contato>(c => c.Contatos)
+                .WithOne(p => p.Pessoa)
+                .HasForeignKey(p => p.PessoaID);
+
+            builder.HasMany<Cliente>(cl => cl.Cliente)
+                .WithOne(p => p.Pessoa)
+                .HasForeignKey(p => p.PessoaID);
+
 
         }
     }

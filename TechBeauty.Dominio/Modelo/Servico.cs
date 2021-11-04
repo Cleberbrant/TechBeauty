@@ -1,4 +1,6 @@
-﻿namespace TechBeauty.Dominio.Modelo
+﻿using System.Collections.Generic;
+
+namespace TechBeauty.Dominio.Modelo
 {
     public class Servico
     {
@@ -7,6 +9,9 @@
         public decimal Preco { get; private set; }
         public string Descricao { get; private set; }
         public int DuracaoEmMin { get; private set; }
+        public List<Agendamento> Agendamentos { get; set; }
+        public List<ServicoColaborador> ServicoColaborador { get; set; }
+
 
         public static Servico Criar(int id, string nome, decimal preco, string descricao, int duracaoEmMin)
         {

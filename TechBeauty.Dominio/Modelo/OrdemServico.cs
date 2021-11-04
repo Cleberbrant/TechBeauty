@@ -1,4 +1,5 @@
-﻿using TechBeauty.Dominio.Modelo.Enumeradores;
+﻿using System.Collections.Generic;
+using TechBeauty.Dominio.Modelo.Enumeradores;
 
 namespace TechBeauty.Dominio.Modelo
 {
@@ -9,6 +10,8 @@ namespace TechBeauty.Dominio.Modelo
         public int DuracaoTotal { get; set; }
         public Cliente Cliente { get; set; } //ef
         public int ClienteID { get; set; } //ef
+        public List<Agendamento> Agendamento { get; set; }
+        public int AgendamentoID { get; set; }
         public StatusOS Status { get; set; }
 
         public static OrdemServico Criar(int id, decimal precoTotal, int duracaoTotal, Cliente cliente, StatusOS status)

@@ -16,6 +16,14 @@ namespace TechBeauty.Dados
         public DbSet<Pessoa> Pessoa { get; set; }
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<OrdemServico> OrdemServico { get; set; }
+        public DbSet<Servico> Servico { get; set; }
+        public DbSet<ServicoColaborador> ServicoColaborador { get; set; }
+        public DbSet<TipoContato> TipoContato { get; set; }
+        public DbSet<Contato> Contato { get; set; }
+        public DbSet<Agendamento> Agendamento { get; set; }
+        public DbSet<LogAgendamento> LogAgendamento { get; set; }
+        public DbSet<Escala> Escala { get; set; }
+        public DbSet<Colaborador> Colaborador { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,6 +42,14 @@ namespace TechBeauty.Dados
             modelBuilder.ApplyConfiguration(new PessoaMap());
             modelBuilder.ApplyConfiguration(new ClienteMap());
             modelBuilder.ApplyConfiguration(new OrdemServicoMap());
+            modelBuilder.ApplyConfiguration(new ServicoMap());
+            modelBuilder.ApplyConfiguration(new ServicoColaboradorMap());
+            modelBuilder.ApplyConfiguration(new TipoContatoMap());
+            modelBuilder.ApplyConfiguration(new ContatoMap());
+            modelBuilder.ApplyConfiguration(new AgendamentoMap());
+            modelBuilder.ApplyConfiguration(new LogAgendamentoMap());
+            modelBuilder.ApplyConfiguration(new EscalaMap());
+            modelBuilder.ApplyConfiguration(new ColaboradorMap());
             base.OnModelCreating(modelBuilder);
         }
     }

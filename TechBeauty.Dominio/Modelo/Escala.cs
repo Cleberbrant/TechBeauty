@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TechBeauty.Dominio.Modelo
 {
@@ -8,5 +9,6 @@ namespace TechBeauty.Dominio.Modelo
         public DateTime DataHoraEntrada { get; set; }
         public DateTime DataHoraSaida { get; set; }
         public Colaborador Colaborador { get; set; }
+        public int ColadoradoresID { get; set; }
     }
 }

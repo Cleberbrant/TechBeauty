@@ -9,20 +9,17 @@ using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dados.Map
 {
-    public class GeneroMap : IEntityTypeConfiguration<Genero>
+    class ContatoMap : IEntityTypeConfiguration<Contato>
     {
-        public void Configure(EntityTypeBuilder<Genero> builder)
+        public void Configure(EntityTypeBuilder<Contato> builder)
         {
-            builder.ToTable("Genero");
+            builder.ToTable("Contato");
 
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Valor)
-                .HasColumnType("varchar(30)");
-
-            builder.HasMany<Colaborador>(c => c.Colaboradores)
-                .WithOne(g => g.Genero)
-                .HasForeignKey(g => g.GeneroID);
+                .HasColumnType("varchar(50)")
+                .IsRequired();
         }
     }
 }

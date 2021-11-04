@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TechBeauty.Dominio.Modelo
 {
@@ -12,6 +13,7 @@ namespace TechBeauty.Dominio.Modelo
         public string Complemento { get; private set; }
         public string CEP { get; set; }
         public string Bairro { get; set; }
+        public List<Colaborador> Colaboradores { get; set; }
 
         public static Endereco Criar(int id, string logradouro, string cidade, string uf, string numero, string complemento, string cep, string bairro)
         {
