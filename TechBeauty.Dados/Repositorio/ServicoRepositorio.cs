@@ -9,38 +9,41 @@ namespace TechBeauty.Dados.Repositorio
 {
     public class ServicoRepositorio
     {
-        public List<Servico> TabelaServico { get; set; } = new List<Servico>();
+        protected readonly Contexto contexto;
 
         public ServicoRepositorio()
         {
-            PreencherDados();
+            contexto = new Contexto();
         }
 
         public void Incluir(Servico servico)
         {
-            TabelaServico.Add(servico);
+            contexto.Servico.Add(servico);
         }
 
-        public void Alterar(int id, string nome, decimal preco, string descricao, int duracaoEmMin)
+        public void Alterar(Servico servico)
         {
-            TabelaServico.FirstOrDefault(x => x.Id == id).Alterar(nome, preco, descricao, duracaoEmMin);
+            contexto.Servico.Update(servico);
+            contexto.SaveChanges();
         }
 
         public Servico SelecionarPorId(int id)
         {
-            return TabelaServico.FirstOrDefault(x => x.Id == id);
+            return contexto.Servico.FirstOrDefault(x => x.Id == id);
         }
 
         public void Excluir(int id)
         {
-            TabelaServico.Remove(SelecionarPorId(id));
+            var entity = SelecionarPorId(id);
+            contexto.Servico.Remove(entity);
+            contexto.SaveChanges();
         }
 
-        private void PreencherDados()
-        {
-            TabelaServico.Add(Servico.Criar(1, "Corte Social", 15.00m, "Corte de cabelo no estilo social", 40));
-            TabelaServico.Add(Servico.Criar(2, "Corte Degrade", 25.00m, "Corte de cabelo no estilo degrade", 55));
-            TabelaServico.Add(Servico.Criar(3, "Alisamento", 45.00m, "Alisamento de cabelo", 80));
-        }
+        //private void PreencherDados()
+        //{
+        //    TabelaServico.Add(Servico.Criar(1, "Corte Social", 15.00m, "Corte de cabelo no estilo social", 40));
+        //    TabelaServico.Add(Servico.Criar(2, "Corte Degrade", 25.00m, "Corte de cabelo no estilo degrade", 55));
+        //    TabelaServico.Add(Servico.Criar(3, "Alisamento", 45.00m, "Alisamento de cabelo", 80));
+        //}
     }
 }

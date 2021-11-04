@@ -7,46 +7,49 @@ namespace TechBeauty.Dados.Repositorio
 {
     public class ClienteRepositorio
     {
-        public List<Cliente> TabelaCliente { get; set; } = new List<Cliente>();
+        protected readonly Contexto contexto;
 
         public ClienteRepositorio(List<Contato> contato)
         {
-            PreencherDados(contato);
+            contexto = new Contexto();
         }
 
         public void Incluir(Cliente cliente)
         {
-            TabelaCliente.Add(cliente);
+            contexto.Cliente.Add(cliente);
+            contexto.SaveChanges();
         }
 
-        public void Alterar(int id, string nome, string cpf, DateTime dataNascimento, List<Contato> contatos)
+        public void Alterar(Cliente cliente)
         {
-            TabelaCliente.FirstOrDefault(x => x.Id == id).Alterar(nome, cpf, dataNascimento, contatos);
+            contexto.Cliente.Update(cliente);
         }
 
         public Cliente SelecionarPorId(int id)
         {
-            return TabelaCliente.FirstOrDefault(x => x.Id == id);
+            return contexto.Cliente.FirstOrDefault(x => x.Id == id);
         }
 
         public void Excluir(int id)
         {
-            TabelaCliente.Remove(SelecionarPorId(id));
+            var entity = SelecionarPorId(id);
+            contexto.Cliente.Remove(entity);
+            contexto.SaveChanges();
         }
 
-        public void PreencherDados(List<Contato> contato)
-        {
-            var contato1 = contato.Where(x => x.Id == 1).FirstOrDefault();
-            var contato2 = contato.Where(x => x.Id == 2).FirstOrDefault();
-            var contato3 = contato.Where(x => x.Id == 3).FirstOrDefault();
+        //public void PreencherDados(List<Contato> contato)
+        //{
+        //    var contato1 = contato.Where(x => x.Id == 1).FirstOrDefault();
+        //    var contato2 = contato.Where(x => x.Id == 2).FirstOrDefault();
+        //    var contato3 = contato.Where(x => x.Id == 3).FirstOrDefault();
 
-            List<Contato> contatos1 = new List<Contato>() { contato1 };
-            List<Contato> contatos2 = new List<Contato>() { contato2 };
-            List<Contato> contatos3 = new List<Contato>() { contato3 };
+        //    List<Contato> contatos1 = new List<Contato>() { contato1 };
+        //    List<Contato> contatos2 = new List<Contato>() { contato2 };
+        //    List<Contato> contatos3 = new List<Contato>() { contato3 };
 
-            TabelaCliente.Add(Cliente.Criar(1, "Cleber", "06776457166", new DateTime(2002, 05, 13), contatos1));
-            TabelaCliente.Add(Cliente.Criar(2, "Thamiris", "06235444466", new DateTime(1998, 03, 30), contatos2));
-            TabelaCliente.Add(Cliente.Criar(3, "Weslin", "067764575555", new DateTime(2010, 10, 22), contatos3));
-        }
+        //    TabelaCliente.Add(Cliente.Criar(1, "Cleber", "06776457166", new DateTime(2002, 05, 13), contatos1));
+        //    TabelaCliente.Add(Cliente.Criar(2, "Thamiris", "06235444466", new DateTime(1998, 03, 30), contatos2));
+        //    TabelaCliente.Add(Cliente.Criar(3, "Weslin", "067764575555", new DateTime(2010, 10, 22), contatos3));
+        //}
     }
 }

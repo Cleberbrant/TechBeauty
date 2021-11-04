@@ -10,42 +10,45 @@ namespace TechBeauty.Dados.Repositorio
 {
     public class OrdemServicoRepositorio
     {
-        public List<OrdemServico> TabelaOrdemServico { get; set; } = new List<OrdemServico>();
+        protected readonly Contexto contexto;
 
         public OrdemServicoRepositorio(List<Cliente> cliente)
         {
-            PreencherDados(cliente);
+            contexto = new Contexto();
         }
 
         public void Incluir(OrdemServico ordemServico)
         {
-            TabelaOrdemServico.Add(ordemServico);
+            contexto.OrdemServico.Add(ordemServico);
         }
 
-        public void Alterar(int id, decimal precoTotal, int duracaoTotal, Cliente cliente, StatusOS status)
+        public void Alterar(OrdemServico ordemServico)
         {
-            TabelaOrdemServico.FirstOrDefault(x => x.Id == id).Alterar(precoTotal, duracaoTotal, cliente, status);
+            contexto.OrdemServico.Update(ordemServico);
+            contexto.SaveChanges();
         }
 
         public OrdemServico SelecionarPorId(int id)
         {
-            return TabelaOrdemServico.FirstOrDefault(x => x.Id == id);
+            return contexto.OrdemServico.FirstOrDefault(x => x.Id == id);
         }
 
         public void Excluir(int id)
         {
-            TabelaOrdemServico.Remove(SelecionarPorId(id));
+            var entity = SelecionarPorId(id);
+            contexto.OrdemServico.Remove(entity);
+            contexto.SaveChanges();
         }
 
-        public void PreencherDados(List<Cliente> cliente)
-        {
-            var cliente1 = cliente.Where(x => x.Id == 1).FirstOrDefault();
-            var cliente2 = cliente.Where(x => x.Id == 2).FirstOrDefault();
-            var cliente3 = cliente.Where(x => x.Id == 3).FirstOrDefault();
+        //public void PreencherDados(List<Cliente> cliente)
+        //{
+        //    var cliente1 = cliente.Where(x => x.Id == 1).FirstOrDefault();
+        //    var cliente2 = cliente.Where(x => x.Id == 2).FirstOrDefault();
+        //    var cliente3 = cliente.Where(x => x.Id == 3).FirstOrDefault();
 
-            TabelaOrdemServico.Add(OrdemServico.Criar(1, 45.00m, 60, cliente1, StatusOS.Concluido));
-            TabelaOrdemServico.Add(OrdemServico.Criar(2, 38.00m, 46, cliente2, StatusOS.ParcialmenteConcluido));
-            TabelaOrdemServico.Add(OrdemServico.Criar(3, 65.00m, 85, cliente3, StatusOS.Pendente));
-        }
+        //    TabelaOrdemServico.Add(OrdemServico.Criar(1, 45.00m, 60, cliente1, StatusOS.Concluido));
+        //    TabelaOrdemServico.Add(OrdemServico.Criar(2, 38.00m, 46, cliente2, StatusOS.ParcialmenteConcluido));
+        //    TabelaOrdemServico.Add(OrdemServico.Criar(3, 65.00m, 85, cliente3, StatusOS.Pendente));
+        //}
     }
 }

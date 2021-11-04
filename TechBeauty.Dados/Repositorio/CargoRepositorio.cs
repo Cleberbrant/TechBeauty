@@ -6,45 +6,49 @@ namespace TechBeauty.Dados.Repositorio
 {
     public class CargoRepositorio
     {
-        public List<Cargo> TabelaCargo { get; set; } = new List<Cargo>();
+        protected readonly Contexto contexto;
 
         public CargoRepositorio()
         {
-            PreencherDados();
+            contexto = new Contexto();
         }
 
         public void Incluir(Cargo cargo)
         {
-            TabelaCargo.Add(cargo);            
+            contexto.Cargo.Add(cargo);
+            contexto.SaveChanges();
         }
 
-        public void Alterar(int id, string nome, string descricao)
+        public void Alterar(Cargo cargo)
         {
-            TabelaCargo.FirstOrDefault(x => x.Id == id).Alterar(nome, descricao);
+            contexto.Cargo.Update(cargo);
+            contexto.SaveChanges();
         }
 
         public Cargo SelecionarPorId(int id)
         {
-            return TabelaCargo.FirstOrDefault(x => x.Id == id);
+            return contexto.Cargo.FirstOrDefault(x => x.Id == id);
         }
 
         public void Excluir(int id)
         {
-            TabelaCargo.Remove(SelecionarPorId(id));
+            var entity = SelecionarPorId(id);
+            contexto.Cargo.Remove(entity);
+            contexto.SaveChanges();
         }
 
 
-        private void PreencherDados()
-        {
-            TabelaCargo.Add(Cargo.Criar(1, "Cabelereira", 
-                "Efetua cortes de cabelo feminino e masculo"));
+        //private void PreencherDados()
+        //{
+        //    TabelaCargo.Add(Cargo.Criar(1, "Cabelereira", 
+        //        "Efetua cortes de cabelo feminino e masculo"));
 
-            TabelaCargo.Add(Cargo.Criar(2, "Manicure"));
+        //    TabelaCargo.Add(Cargo.Criar(2, "Manicure"));
 
-            TabelaCargo.Add(Cargo.Criar(3, "Depiladora"));
+        //    TabelaCargo.Add(Cargo.Criar(3, "Depiladora"));
 
-            TabelaCargo.Add(Cargo.Criar(4, "Colorista"));
-        }
+        //    TabelaCargo.Add(Cargo.Criar(4, "Colorista"));
+        //}
 
     }
 }

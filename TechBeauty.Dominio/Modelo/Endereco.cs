@@ -15,10 +15,9 @@ namespace TechBeauty.Dominio.Modelo
         public string Bairro { get; set; }
         public List<Colaborador> Colaboradores { get; set; }
 
-        public static Endereco Criar(int id, string logradouro, string cidade, string uf, string numero, string complemento, string cep, string bairro)
+        public static Endereco Criar(string logradouro, string cidade, string uf, string numero, string complemento, string cep, string bairro = "Sem bairro")
         {
             Endereco endereco = new Endereco();
-            endereco.Id = id;
             endereco.Logradouro = logradouro;
             endereco.Cidade = cidade;
             endereco.UF = uf;
@@ -30,7 +29,7 @@ namespace TechBeauty.Dominio.Modelo
             return endereco;
         }
 
-        public void Alterar(string logradouro, string cidade, string uf, string numero, string complemento, string cep, string bairro)
+        public Endereco Alterar(string logradouro, string cidade, string uf, string numero, string complemento, string cep, string bairro = "Sem numero")
         {
             Logradouro = logradouro;
             Cidade = cidade;
@@ -39,6 +38,8 @@ namespace TechBeauty.Dominio.Modelo
             Complemento = complemento;
             CEP = cep;
             Bairro = bairro;
+
+            return this;
         }
     }
 }

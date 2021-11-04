@@ -15,7 +15,15 @@ namespace TechBeauty.Dados.Map
         {
             builder.ToTable("ServicoColaborador");
 
-            builder.Property(x => x.ID);
+            builder.HasKey(x => new { x.ServicoID, x.ColaboradorID });
+
+            builder.HasOne<Servico>(s => s.Servico)
+                .WithMany(x => x.ServicoColaborador)
+                .HasForeignKey(x => x.ServicoID);
+
+            builder.HasOne<Colaborador>(s => s.Colaborador)
+                .WithMany(c => c.ServicoColaborador)
+                .HasForeignKey(c => c.ColaboradorID);
 
         }
     }

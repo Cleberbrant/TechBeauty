@@ -15,8 +15,6 @@ namespace TechBeauty.Dados.Map
         {
             builder.ToTable("Colaborador");
 
-            builder.HasKey(x => x.Id);
-
             builder.Property(x => x.NomeSocial)
                 .HasColumnType("varchar(100)");
 
@@ -27,11 +25,6 @@ namespace TechBeauty.Dados.Map
             builder.HasMany<Agendamento>(a => a.Agendamento)
                 .WithOne(c => c.Colaborador)
                 .HasForeignKey(c => c.ColaboradorID);
-
-            builder.HasMany<ServicoColaborador>(s => s.ServicoColaborador)
-                .WithOne(c => c.Colaborador)
-                .HasForeignKey(c => c.ColaboradorID);
-
         }
     }
 }

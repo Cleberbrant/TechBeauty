@@ -22,7 +22,7 @@ namespace TechBeauty.Dados.Map
                 .IsRequired();
 
             builder.Property(x => x.Descricao)
-                .HasColumnType("varchar(15)");
+                .HasColumnType("varchar(150)");
         }
     }
 }

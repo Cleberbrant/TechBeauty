@@ -9,24 +9,18 @@ namespace TechBeauty.Dominio.Modelo
         public Genero Genero { get; set; }
         public string NomeSocial { get; set; }
         public int GeneroID { get; set; }
-        public ContratoTrabalho Contrato { get; set; }
+        public List<ContratoTrabalho> Contrato { get; set; }
         public Endereco Endereco { get; set; }
         public int EnderecosID { get; set; }
-        public Pessoa Pessoa { get; set; }
-        public int PessoaID { get; set; }
         public List<Escala> Escalas { get; set; }
         public List<Agendamento> Agendamento { get; set; }
-        public int AgendamentoID { get; set; }
         public List<ServicoColaborador> ServicoColaborador { get; set; }
-
-
-
-        public static Colaborador Criar(int id, string nome, string cpf, 
+     
+        public static Colaborador Criar(string nome, string cpf, 
         DateTime dataNascimento, List<Contato> contatos, List<Servico> servicos, 
-        Endereco endereco, Genero genero, ContratoTrabalho contrato, string NomeSocial = "")
+        Endereco endereco, Genero genero, List<ContratoTrabalho> contrato, string NomeSocial = "")
         {
             Colaborador colaborador = new Colaborador();
-            colaborador.Id = id;
             colaborador.Nome = nome;
             colaborador.CPF = cpf;
             colaborador.DataNascimento = dataNascimento;
@@ -42,7 +36,7 @@ namespace TechBeauty.Dominio.Modelo
 
         public void Alterar(string nome, string cpf,
         DateTime dataNascimento, List<Contato> contatos, List<Servico> servicos,
-        Endereco endereco, Genero genero, ContratoTrabalho contrato, string nomeSocial = "")
+        Endereco endereco, Genero genero, List<ContratoTrabalho> contrato, string nomeSocial = "")
         {
             Nome = nome;
             CPF = cpf;

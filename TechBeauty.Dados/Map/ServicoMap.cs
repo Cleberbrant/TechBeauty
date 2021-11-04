@@ -37,10 +37,6 @@ namespace TechBeauty.Dados.Map
                 .WithOne(x => x.Servico)
                 .HasForeignKey(x => x.ServicoID);
 
-            builder.HasMany<ServicoColaborador>(s => s.ServicoColaborador)
-                .WithOne(x => x.Servico)
-                .HasForeignKey(x => x.ServicoID);
-
         }
     }
 }

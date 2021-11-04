@@ -6,38 +6,42 @@ namespace TechBeauty.Dados.Repositorio
 {
     public class TipoContatoRepositorio
     {
-        public List<TipoContato> TabelaTipoContato { get; set; } = new List<TipoContato>();
+        protected readonly Contexto contexto;
 
         public TipoContatoRepositorio()
         {
-            PreencherDados();
+            contexto = new Contexto();
         }
 
         public void Incluir(TipoContato tipo)
         {
-            TabelaTipoContato.Add(tipo);            
+            contexto.TipoContato.Add(tipo);
+            contexto.SaveChanges();
         }
 
-        public void Alterar(int id, string valor)
+        public void Alterar(TipoContato tipoContato)
         {
-            TabelaTipoContato.FirstOrDefault(x => x.Id == id).Alterar(valor);
+            contexto.TipoContato.Update(tipoContato);
+            contexto.SaveChanges();
         }
 
         public TipoContato SelecionarPorId(int id)
         {
-            return TabelaTipoContato.FirstOrDefault(x => x.Id == id);
+            return contexto.TipoContato.FirstOrDefault(x => x.Id == id);
         }
 
         public void Excluir(int id)
         {
-            TabelaTipoContato.Remove(SelecionarPorId(id));
+            var entity = SelecionarPorId(id);
+            contexto.TipoContato.Remove(entity);
+            contexto.SaveChanges();
         }
 
-        private void PreencherDados()
-        {
-            Incluir(TipoContato.Criar(1, "Telefone"));
-            Incluir(TipoContato.Criar(2, "Instagram"));
-            Incluir(TipoContato.Criar(3, "Tiktok"));
-        }
+        //private void PreencherDados()
+        //{
+        //    Incluir(TipoContato.Criar(1, "Telefone"));
+        //    Incluir(TipoContato.Criar(2, "Instagram"));
+        //    Incluir(TipoContato.Criar(3, "Tiktok"));
+        //}
     }
 }

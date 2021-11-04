@@ -5,7 +5,7 @@ using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dados
 {
-    class Contexto : DbContext
+    public class Contexto : DbContext
     {
         public DbSet<CargoContratoTrabalho> CargoContratoTrabalho { get; set; }
         public DbSet<RegimeContratual> RegimeContratual { get; set; }
@@ -27,7 +27,7 @@ namespace TechBeauty.Dados
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=MIR-0552; Database=TechBeauty; Trusted_Connection=True");
+            optionsBuilder.UseSqlServer("Server=MIR-0552; Database=TechBeautyEF; Trusted_Connection=True");
             base.OnConfiguring(optionsBuilder);
         }
 

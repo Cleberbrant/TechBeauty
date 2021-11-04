@@ -6,43 +6,46 @@ namespace TechBeauty.Dados.Repositorio
 {
     public class GeneroRepositorio
     {
-        public List<Genero> TabelaGenero { get; private set; } = new List<Genero>();
+        protected readonly Contexto contexto;
 
         public GeneroRepositorio()
         {
-            PreencherDados();
+            contexto = new Contexto();
         }
 
         public void Incluir(Genero genero)
         {
-            TabelaGenero.Add(genero);            
+            contexto.Genero.Add(genero);            
         }
 
-        public void Alterar(int id, string valor)
+        public void Alterar(Genero genero)
         {
-            TabelaGenero.FirstOrDefault(x => x.Id == id).Alterar(valor);
+            contexto.Genero.Update(genero);
+            contexto.SaveChanges();
         }
 
         public Genero SelecionarPorId(int id)
         {
-            return TabelaGenero.FirstOrDefault(x => x.Id == id);
+            return contexto.Genero.FirstOrDefault(x => x.Id == id);
         }
 
         public void Excluir(int id)
         {
-            TabelaGenero.Remove(SelecionarPorId(id));
+            var entity = SelecionarPorId(id);
+            contexto.Genero.Remove(entity);
+            contexto.SaveChanges();
         }
 
-        private void PreencherDados()
-        {
-            Genero genero1 = Genero.Criar(1, "Feminino");
-            Incluir(genero1);
+        //private void PreencherDados()
+        //{
+        //    Genero genero1 = Genero.Criar(1, "Feminino");
+        //    Incluir(genero1);
 
-            Genero genero2 = Genero.Criar(2, "Masculino");
-            Incluir(genero2);
+        //    Genero genero2 = Genero.Criar(2, "Masculino");
+        //    Incluir(genero2);
 
-            Genero genero3 = Genero.Criar(3, "Mulher Trans");
-            Incluir(genero3);
-        }
+        //    Genero genero3 = Genero.Criar(3, "Mulher Trans");
+        //    Incluir(genero3);
+        //}
     }
 }
